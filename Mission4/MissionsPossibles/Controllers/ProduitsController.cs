@@ -49,8 +49,12 @@ namespace Mission.Controllers
         // GET: Produits/Create
         public IActionResult Create()
         {
-         
-            return View();
+            ViewData["CategorieId"] = new SelectList(
+                _context.Categories, //récupère les catégories de la base de données.
+                "Id", //représente la valeur de chaque option.
+                "Titre" //représente le texte affiché dans la liste.
+      );
+            return View(new Produit());
         }
 
         // POST: Produits/Create
