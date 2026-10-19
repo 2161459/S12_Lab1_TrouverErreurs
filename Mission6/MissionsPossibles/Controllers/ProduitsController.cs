@@ -71,7 +71,17 @@ namespace Mission.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-         
+            //ajouter ceci
+            // Recharger les catégories en cas d'erreur
+            produit_VM.CategorieList = _context.Categories
+                .OrderBy(c => c.Titre)
+                .Select(i => new SelectListItem
+                {
+                    Text = i.Titre,
+                    Value = i.Id.ToString()
+                }).ToList();
+
+
             return View(produit_VM);
         }
 
